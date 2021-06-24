@@ -1,0 +1,7 @@
+---
+- hosts: all
+  vars:
+    docker_registry_storage_backend: local_fs
+
+  roles:
+    - wunzeco.docker-registry-v2

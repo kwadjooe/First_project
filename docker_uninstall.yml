@@ -1,0 +1,11 @@
+---
+- hosts: all
+  tasks:
+  - name: removing docker-ce from the computer
+    yum:
+      name: docker-ce
+      state: absent
+  - name: Delete docker configuration from systemd
+    file: path=/etc/systemd/system/docker.service.d state=absent
+  - name: Delete docker Directory
+    file: path=/var/lib/docker state=absent

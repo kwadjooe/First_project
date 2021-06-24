@@ -1,0 +1,13 @@
+
+yum install ansible
+
+ansible-galaxy install suzuki-shunsuke.docker_ce_centos
+ansible-galaxy remove suzuki-shunsuke.docker_ce_centos
+ #-- or 
+
+ ansible-galaxy install robertdebock.docker_ce
+
+ ansible-playbook install_docker_ce.yml -u krystof -k -K
+ yum install epel-release
+ yum install -y python-pip
+ pip install docker-py

@@ -1,0 +1,25 @@
+---
+- hosts: all
+  roles:
+  - role: suzuki-shunsuke.docker_ce_centos
+    docker_centos_state: started
+    docker_centos_enabled: yes
+    docker_centos_users:
+    - krystof
+    ansible_become: yes
+#   ansible_become_user: root
+#   ansible_become_password: "{{vault_gateway_root_password}}"
+#   ansible_become_method : enable
+    become: yes
+
+  tasks:
+  - name: Create docker systemd directory
+    file: path=/etc/systemd/system/docker.service.d state=directory
+  - name: put docker conf file in the docker.service.d location
+    copy: src=docker.conf dest=/etc/systemd/system/docker.service.d
+  - name: Restarded docker daemon
+    command : systemctl daemon-reload
+  - name: Restarted docker service
+    service:
+      name: docker
+      state: restarted

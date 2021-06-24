@@ -1,0 +1,19 @@
+---
+- hosts: all
+  tasks:
+  - name: pull docker images from docker repository
+    docker_image:
+#     name: gns3/automation
+#     state: present
+     name: nginx
+     state: present
+#     name: ubuntu
+#     state: present
+
+  - name: Tag and Push docker images
+    docker_image:
+      name: ubuntu
+      repository: localhost:5000/ubuntu.1
+      tag:latest
+      push: yes
+      
